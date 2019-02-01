@@ -23,15 +23,15 @@ const handleOnMessage = (message) => {
 
         intent.process(res, registry, function (err, res) {
           if (err) {
-            console.log(err.message);
-            return;
+            console.log('Error processing intent:', err.message);
+            // return;
           }
-
-          rtm.sendMessage(res, message.channel)
+          if (res) {
+            rtm.sendMessage(res, message.channel)
+          }
         })
       } catch (err) {
-        console.log(err);
-        console.log(res);
+        console.log('Error with nlp:', err, res);
         rtm.sendMessage(`Sorry, I don't know what you mean.`, message.channel);
       }
     });

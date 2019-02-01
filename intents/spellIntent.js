@@ -9,7 +9,7 @@ module.exports.process = function process(intentData, registry, cb) {
   }
 
   if (!intentData.spellName) {
-    return cb(new Error(`Missing spellName in spell intent`));
+    return cb(new Error(`Missing spellName in spell intent`), `Sorry, I don't know any spell by that name.`);
   }
 
   //strips iris's name from location string just in case
@@ -23,7 +23,7 @@ module.exports.process = function process(intentData, registry, cb) {
       return cb(false, `${spellName}: ${res.data}`);
     })
     .catch(err => {
-      console.log(err.data);
+      console.log('Error communicating with spell service', err.data);
       return cb(false, `Apologies. I had some trouble finding information about ${spellName}.`);
     })
 

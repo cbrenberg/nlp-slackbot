@@ -26,7 +26,7 @@ module.exports.process = function process(intentData, registry, cb) {
       return cb(false, `It is ${res.data} in ${location}.`);
     })
     .catch(err => {
-      console.log(err);
+      console.log('Error communicating with weather service:', err);
       return cb(false, `Apologies. I had some trouble finding the weather in ${location}`);
     })
 

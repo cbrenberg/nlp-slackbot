@@ -26,7 +26,7 @@ module.exports.process = function process(intentData, registry, cb) {
       return cb(false, `The time in ${location} is ${res.data}`);
     })
     .catch(err => {
-      console.log(err);
+      console.log('Error communicating with time service', err);
       return cb(false, `Apologies. I had some trouble finding the time in ${location}`);
     })
 
