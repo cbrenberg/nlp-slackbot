@@ -17,7 +17,9 @@ service.put('/service/:intent/:port', (req, res, next) => {
   //   ? `[${req.connection.remoteAddress}]`
   //   : req.connection.remoteAddress;
 
-  const serviceIp = req.headers['x-forwarded-for'];
+  // const serviceIp = req.headers['x-forwarded-for'];
+
+  const serviceIp = 'https://dnd-slackbot-service.herokuapp.com';
 
   serviceRegistry.add(serviceIntent, serviceIp, servicePort);
   res.send({ result: `${serviceIntent} at ${serviceIp}:${servicePort}` })
