@@ -6,25 +6,24 @@ class ServiceRegistry {
     this._timeout = 120;
   }
 
-  add(intent, ip, port) {
-    const key = intent + ip + port;
+  add(intent, address) {
+    const key = intent + address;
     if (!this._services[key]) {
       this._services[key] = {};
       this._services[key].timestamp = Math.floor(new Date() / 1000);
-      this._services[key].ip = ip;
+      this._services[key].address = address;
       this._services[key].intent = intent;
-      this._services[key].port = port;
 
-      console.log(`Added service for ${intent} on ${ip}:${port}`);
+      console.log(`Added service for ${intent} at ${address}`);
       return;
     }
     this._services[key].timestamp = Math.floor(new Date() / 1000);
-    console.log(`Updated service for ${intent} on ${ip}:${port}`);
+    console.log(`Updated service for ${intent} at ${address}`);
     this._cleanup();
   }
 
-  remove(intent, ip, port) {
-    const key = intent + ip + port;
+  remove(intent, address) {
+    const key = intent + address;
     delete this._services[key];
   }
 
