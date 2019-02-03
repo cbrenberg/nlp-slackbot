@@ -10,7 +10,9 @@ service.set('serviceRegistry', serviceRegistry);
 service.put('/service/:intent/:port', (req, res, next) => {
   const serviceIntent = req.params.intent;
   const servicePort = req.params.port;
-  console.log("req.connection from service put request:", req.connection);
+  console.log("req.connection.remoteAddress from service put request:", req.connection.remoteAddress);
+  console.log("req.ip:", req.ip);
+  console.log("req.headers['x-forwarded-for']:", req.headers['x-forwarded-for']);
 
   const serviceIp = req.connection.remoteAddress.includes('::')
     ? `[${req.connection.remoteAddress}]`
