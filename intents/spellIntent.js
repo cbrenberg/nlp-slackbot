@@ -18,7 +18,7 @@ module.exports.process = function process(intentData, registry, cb) {
   const service = registry.get('spell');
   if (!service) return cb(false, 'No service available');
 
-  axios.get(`http://${service.ip}:${service.port}/service/spell/${spellName}`)
+  axios.get(`http://${service.address}/service/spell/${spellName}`)
     .then(res => {
       return cb(false, `${spellName}: ${res.data}`);
     })
