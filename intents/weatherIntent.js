@@ -13,7 +13,7 @@ module.exports.process = function process(intentData, registry, cb) {
   }
 
   //strips iris's name from location string just in case
-  const location = intentData.location[0].value.replace(/,*.?iris/i, '');
+  const location = intentData.location[0].value.replace(/,*.?phb/i, '');
   //grab latitude and longitude from wit response
   const lat = intentData.location[0].resolved.values[0].coords.lat;
   const long = intentData.location[0].resolved.values[0].coords.long;

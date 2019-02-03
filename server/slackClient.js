@@ -11,7 +11,7 @@ const handleOnAuthenticated = (connectData) => {
 
 const handleOnMessage = (message) => {
 
-  if (message.text.toLowerCase().includes('iris')) {
+  if (message.text.toLowerCase().includes('phb')) {
     nlp.ask(message.text, (err, res) => {
       console.log('handleOnMessage response:', res);
       try {
