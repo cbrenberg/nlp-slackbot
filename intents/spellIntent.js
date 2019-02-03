@@ -23,7 +23,7 @@ module.exports.process = function process(intentData, registry, cb) {
       return cb(false, `${spellName}: ${res.data}`);
     })
     .catch(err => {
-      console.log('Error communicating with spell service', err.data);
+      console.log('Error communicating with spell service', err);
       return cb(false, `Apologies. I had some trouble finding information about ${spellName}.`);
     })
 
