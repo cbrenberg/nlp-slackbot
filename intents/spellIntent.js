@@ -13,14 +13,14 @@ module.exports.process = function process(intentData, registry, cb) {
   }
 
   //strips iris's name from location string just in case
-  const spellName = encodeURIComponent(intentData.spellName[0].value.replace(/,*.?phb/i, ''));
+  const spellName = intentData.spellName[0].value.replace(/,*.?phb/i, '');
 
   const service = registry.get('spell');
   if (!service) return cb(false, 'No service available');
 
-  axios.get(`${service.address}/service/spell/${spellName}`)
+  axios.get(`${service.address}/service/spell/${encodeURIComponent(spellName)}`)
     .then(res => {
-      return cb(false, `${decodeURIComponent(spellName)}: ${res.data}`);
+      return cb(false, `${spellName}: ${res.data}`);
     })
     .catch(err => {
       console.log('Error communicating with spell service', err);

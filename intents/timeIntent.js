@@ -21,7 +21,7 @@ module.exports.process = function process(intentData, registry, cb) {
   const service = registry.get('time');
   if (!service) return cb(false, 'No service available');
 
-  axios.get(`http://${service.ip}:${service.port}/service/location/?lat=${lat}&lng=${long}`)
+  axios.get(`${service.address}/service/location/?lat=${lat}&lng=${long}`)
     .then(res => {
       return cb(false, `The time in ${location} is ${res.data}`);
     })
