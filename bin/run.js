@@ -2,7 +2,7 @@
 
 //require node modules
 require('dotenv').config();
-require('axios');
+const axios = require('axios');
 
 //require modules
 const service = require('../server/service');
