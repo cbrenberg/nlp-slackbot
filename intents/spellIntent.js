@@ -13,7 +13,7 @@ module.exports.process = function process(intentData, registry, cb) {
   }
 
   //strips iris's name from location string just in case
-  const spellName = intentData.spellName[0].value.replace(/,*.?phb/i, '');
+  const spellName = encodeURIComponent(intentData.spellName[0].value.replace(/,*.?phb/i, ''));
 
   const service = registry.get('spell');
   if (!service) return cb(false, 'No service available');
