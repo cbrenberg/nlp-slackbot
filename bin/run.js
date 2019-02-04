@@ -2,6 +2,7 @@
 
 //require node modules
 require('dotenv').config();
+require('axios');
 
 //require modules
 const service = require('../server/service');
@@ -21,5 +22,7 @@ rtm.start();
 slackClient.addAuthenticatedHandler(rtm, () => {
   service.listen(PORT, () => {
     console.log(`IRIS is listening on port ${PORT} in ${service.get('env')} mode`);
+    console.log('attempting to wake up services...');
+    axios.get('https://dnd-slackbot-service.herokuapp.com').catch(err => console.log('error waking spell service'));
   });
 });
