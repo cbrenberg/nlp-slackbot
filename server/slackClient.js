@@ -13,7 +13,7 @@ const handleOnAuthenticated = (connectData) => {
 //process all incoming messages
 const handleOnMessage = (message) => {
   //check for target string '/phb', process message if it exists, otherwise ignore
-  if (message.text.toLowerCase().includes('/phb')) {
+  if (message.text.toLowerCase().includes('phb')) {
     //send message text to natural language processing API
     nlp.ask(message.text, (err, res) => {
       console.log('handleOnMessage response:', res);
