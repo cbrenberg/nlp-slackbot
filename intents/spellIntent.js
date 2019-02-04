@@ -20,7 +20,7 @@ module.exports.process = function process(intentData, registry, cb) {
 
   axios.get(`${service.address}/service/spell/${spellName}`)
     .then(res => {
-      return cb(false, `${spellName}: ${res.data}`);
+      return cb(false, `${decodeURIComponent(spellName)}: ${res.data}`);
     })
     .catch(err => {
       console.log('Error communicating with spell service', err);
