@@ -3,11 +3,12 @@
 const { RTMClient, LogLevel } = require('@slack/client');
 let rtm = null;
 let nlp = null;
-let registry = null;
+
+// console.log('=====================\n in slackClient.js\n ======================\n', process.env);
 
 //log status on successful authentication with Slack real time messaging API
 const handleOnAuthenticated = (connectData) => {
-  console.log(`Logged in as ${connectData.self.name} of team ${connectData.team.name}, but not yet connected to a channel.`)
+  console.log(`Logged in as ${connectData.self.name} of team ${connectData.team.name}.`)
 }
 
 //process all incoming messages
@@ -25,7 +26,7 @@ const handleOnMessage = (message) => {
         //otherwise, require the associated intent module file
         const intent = require('../intents/' + res.intent[0].value + 'Intent')
         //process message using module's 'process' method
-        intent.process(res, registry, function (err, res) {
+        intent.process(res, process.env.SPELL_SERVICE_BASE_URL, function (err, res) {
           if (err) {
             console.log('Error processing intent:', err.message);
             // return;
@@ -51,13 +52,11 @@ const addAuthenticatedHandler = (rtm, handler) => {
 
 //export slackclient initialization function
 //slackClient takes a bot token, a natural language processing instance, and a service registry instance
-module.exports.init = function slackClient(token, nlpClient, serviceRegistry) {
+module.exports.init = function slackClient(token, nlpClient) {
   //initialize a Slack RTMClient instance with bot token
   rtm = new RTMClient(token, { logLevel: LogLevel.INFO });
   //assign incoming nlpClient to global nlp variable
   nlp = nlpClient;
-  //assign incoming service registry to global registry variable
-  registry = serviceRegistry;
   //assign authentication handler to new rtm client 
   addAuthenticatedHandler(rtm, handleOnAuthenticated);
   //assign message handling to rtm client
