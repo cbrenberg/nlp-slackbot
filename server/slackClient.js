@@ -20,11 +20,11 @@ const handleOnMessage = (message) => {
       console.log('handleOnMessage response:', res);
       try {
         //throw error if nlp doesn't return a valid intent
-        if (!res.intent || !res.intent[0] || !res.intent[0].value) {
+        if (!res.intent_entity || !res.intent_entity[0] || !res.intent_entity[0].value) {
           throw new Error("Could not extract intent");
         }
         //otherwise, require the associated intent module file
-        const intent = require('../intents/' + res.intent[0].value + 'Intent')
+        const intent = require('../intents/' + res.intent_entity[0].value + 'Intent')
         //process message using module's 'process' method
         intent.process(res, process.env.SPELL_SERVICE_BASE_URL, function (err, res) {
           if (err) {
