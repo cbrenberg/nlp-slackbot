@@ -4,8 +4,8 @@ const axios = require('axios');
 
 module.exports.process = function process(intentData, address, cb) {
 
-  if (intentData.intent[0].value !== "spell") {
-    return cb(new Error(`Expected spell intent, instead got ${intentData.intent[0].value}`))
+  if (intentData.intent_entity[0].value !== "spell") {
+    return cb(new Error(`Expected spell intent, instead got ${intentData.intent_entity[0].value}`))
   }
 
   if (!intentData.spellName) {
